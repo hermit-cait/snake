@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, p, button {
+  font-family: monospace;
+}
+
+.welcome-screen {
+  background-color: rgb(206, 233, 206);
+  width: clamp(10rem, 70vw, 60rem);
+  margin: 3rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+.icon {
+  font-size: 6rem;
+}
+
+p {
+  font-size: 1.5rem;
+  margin-block: 2rem;
+}
+
+button {
+  font-size: 2rem;
+  padding: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.start {
+  background-color: lightgreen;
+  margin-block-end: 2rem;
+}
+
+.start:hover {
+  background-color: #fff;
+}
+
+.game-container {  
+  background-color: #bbb;
+  width: clamp(10rem, 85vw, 60rem);
+  height: 30rem;
+  margin: 3rem auto;
+  display: none;
+  position: relative;
+}
+
+.snake {
+  background-color: lightgreen;
+  width: 3rem;
+  height: 0.5rem;
+  position: absolute; 
+  top: 15%;
+  left: 15%;
+}
+
+.controls {
+  width: fit-content;
+  margin: 0 auto;
+  display: none;
+}
+
+.pause, .play, .restart {
+  font-size: 1rem;
+}
+
+@media (min-width: 600px) {
+  h1 {
+    font-size: 6rem;
+  }
+}
