@@ -9,12 +9,16 @@ h1, p, button {
 }
 
 .welcome-screen {
-  background-color: rgb(206, 233, 206);
+  background-color: hsl(120, 100%, 85%);
   width: clamp(10rem, 70vw, 60rem);
   margin: 3rem auto;
   padding: 2rem;
   text-align: center;
 }
+
+/* Comment the below out for easier testing */
+
+/* start */
 
 h1 {
   font-size: 3.5rem;
@@ -29,38 +33,48 @@ p {
   margin-block: 2rem;
 }
 
+/* end */
+
 button {
+  background-color: #eee;
   font-size: 2rem;
   padding: 1rem;
   border: none;
   cursor: pointer;
 }
 
+button:hover {  
+  background-color: #ddd;
+}
+
 .start {
-  background-color: lightgreen;
-  margin-block-end: 2rem;
+  background-color: hsl(120, 100%, 70%);
 }
 
 .start:hover {
   background-color: #fff;
 }
 
-.game-container {  
-  background-color: #bbb;
-  width: clamp(10rem, 85vw, 60rem);
-  height: 30rem;
-  margin: 3rem auto;
-  display: none;
-  position: relative;
+.snake-body {
+  background-color: hsl(120, 100%, 85%);
 }
 
-.snake {
-  background-color: lightgreen;
-  width: 3rem;
-  height: 0.5rem;
-  position: absolute; 
-  top: 15%;
-  left: 15%;
+.snake-head {
+  background-color: hsl(120, 85%, 70%);
+}
+
+.apple {
+  background-color: hsl(0, 85%, 65%);
+}
+
+.board {
+  margin: 1.5rem auto;
+}
+
+td {
+  background-color: #eee;
+  width: 2rem;
+  height: 2rem;
 }
 
 .controls {
@@ -70,7 +84,7 @@ button {
 }
 
 .pause, .play, .restart {
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 @media (min-width: 600px) {
