@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-h1, p, button {
+h1, p, button, span {
   font-family: monospace;
 }
 
@@ -36,7 +36,7 @@ p {
 /* end */
 
 button {
-  background-color: #eee;
+  background-color: hsl(0, 0%, 93%);
   font-size: 2rem;
   padding: 1rem;
   border: none;
@@ -44,7 +44,7 @@ button {
 }
 
 button:hover {  
-  background-color: #ddd;
+  background-color: hsl(0, 0%, 87%);
 }
 
 .start {
@@ -52,7 +52,7 @@ button:hover {
 }
 
 .start:hover {
-  background-color: #fff;
+  background-color: hsl(0, 0%, 100%);
 }
 
 .snake-body {
@@ -72,9 +72,10 @@ button:hover {
 }
 
 td {
-  background-color: #eee;
-  width: 2rem;
-  height: 2rem;
+  background-color: hsl(0, 0%, 93%);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 1.5rem;
 }
 
 .controls {
@@ -83,8 +84,13 @@ td {
   display: none;
 }
 
-.pause, .play, .restart {
-  font-size: 2rem;
+.score > span, .pause, .play, .restart {
+  font-size: 1rem;
+}
+
+.score {
+  text-align: center;
+  margin-block-start: 1.5rem;
 }
 
 @media (min-width: 600px) {

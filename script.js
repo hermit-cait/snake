@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $(".start").click(function() {
     /* Hide info and show game screen */
-    $(".welcome-screen").fadeOut(300);
+    $(".welcome-screen").hide();
     $(".board").show();
     $(".controls").show(); 
     createBoard();
@@ -9,8 +9,19 @@ $(document).ready(function() {
     updateSnakeBody();      
     applePosition();
     createApple();
+    /* NOTE: Restart button is buggy and sometimes breaks game. */
     $(".restart").click(function() { 
       gameOver();  
+      score = 0;
+      $(".score").html("<span>score: " + score + "</span>");
+      boardSize = 16;
+      movement = null;
+      movingRight = true;
+      movingDown = false;
+      movingLeft = false;
+      movingUp = false;
+      /* Higher number = slower, lower number = faster */
+      speed = 150;
       snakeHead = [2,6];
       snakeBody = [
         [2,6],
@@ -18,9 +29,7 @@ $(document).ready(function() {
         [2,4],
         [2,3],
         [2,2]
-      ];      
-      movement = null;
-      movingRight = true;
+      ];
       startGame();
       updateSnakeBody();
       applePosition();
@@ -38,6 +47,7 @@ $(document).ready(function() {
 });
 
 let boardSize = 16;
+let score = 0;
 let movement = null;
 let movingRight = true;
 let movingDown = false;
@@ -65,6 +75,8 @@ function createBoard() {
   }
   $(document.body).prepend('<table class="board"></table>');
   $(".board").html(boardArray);
+  $(document.body).prepend('<div class="score"></div>');  
+  $(".score").html("<span>score: " + score + "</span>");
 };
 
 function startGame() {
@@ -77,24 +89,40 @@ function updateSnakeBody() {
   /* Handles changing direction of snake head movement */
   if (movingRight == true) {
     snakeNewHead = [snakeHead[0], snakeHead[1] + 1];
-  } else if (movingDown == true) {
-    snakeNewHead = [snakeHead[0] + 1, snakeHead[1]];       
-  } else if (movingLeft == true) {
-    snakeNewHead = [snakeHead[0], snakeHead[1] - 1];
-  } else if (movingUp == true) {
-    snakeNewHead = [snakeHead[0] - 1, snakeHead[1]];
-  };
+    } else if (movingDown == true) {
+      snakeNewHead = [snakeHead[0] + 1, snakeHead[1]];       
+    } else if (movingLeft == true) {
+      snakeNewHead = [snakeHead[0], snakeHead[1] - 1];
+    } else if (movingUp == true) {
+      snakeNewHead = [snakeHead[0] - 1, snakeHead[1]];
+    };
 
   /* Ends game if snake hits wall */
-  if (snakeNewHead[0] < 1 || snakeNewHead[1] < 1) {
-    gameOver();
-  } else if (snakeNewHead[0] >= boardSize - 1 || snakeNewHead[1] >= boardSize - 1) {
-    gameOver();
+  function checkForWall() {
+    if (snakeNewHead[0] < 1 || snakeNewHead[1] < 1) {
+      gameOver();
+    } else if (snakeNewHead[0] >= boardSize - 1 || snakeNewHead[1] >= boardSize - 1) {
+      gameOver();
+    };
   };
+  checkForWall();
 
   /* Handles movement of snake body by giving each cell the position of the previous cell in the array */
   for (var i = (snakeBody.length - 1); i > 0; i--) {
     snakeBody[i] = snakeBody[i - 1];
+      /* Fix for bug involving fast direction changes */ 
+    if (snakeBody[i][0] == snakeNewHead[0] && snakeBody[i][1] == snakeNewHead[1]) {    
+      if (movingLeft == true) {
+        snakeNewHead = [snakeHead[0], snakeHead[1] + 1];
+        } else if (movingUp == true) {
+          snakeNewHead = [snakeHead[0] + 1, snakeHead[1]];       
+        } else if (movingRight == true) {
+          snakeNewHead = [snakeHead[0], snakeHead[1] - 1];
+        } else if (movingDown == true) {
+          snakeNewHead = [snakeHead[0] - 1, snakeHead[1]];
+        };
+      checkForWall();
+    }
   };  
   
   /* Saves new position of snake head */
@@ -106,10 +134,21 @@ function updateSnakeBody() {
   var newCell = { length: 0 };  
   var newCell = $('tr').eq(snakeNewHead[0]).find('td').eq(snakeNewHead[1]);
   if (newCell.hasClass('snake-body')) {
+    if (movingRight == true) {
+      snakeHead = [snakeHead[0], snakeHead[1] + 1];
+      } else if (movingDown == true) {
+        snakeHead = [snakeHead[0] + 1, snakeHead[1]];       
+      } else if (movingLeft == true) {
+        snakeHead = [snakeHead[0], snakeHead[1] - 1];
+      } else if (movingUp == true) {
+        snakeHead = [snakeHead[0] - 1, snakeHead[1]];
+      };
     gameOver();
   } else {
     if (newCell.hasClass('apple')) {
-      snakeBody.push([]);      
+      snakeBody.push([]);         
+      score++;   
+      $(".score").html("<span>score: " + score + "</span>");
       applePosition();
       createApple();
     };
@@ -128,8 +167,6 @@ function createSnake() {
 
 /* Places apple in a random cell */
 
-/* NOTE: Currently there is no logic to check whether apple is on the snake or not and also to ensure the apple doesn't spawn in the same cell multiple times */
-
 function applePosition() { 
   
   /* NORMAL MODE */
@@ -142,12 +179,16 @@ function applePosition() {
 
   applePositionY = getRandomInt(2,6);
   applePositionX = getRandomInt(2,6);
-  apple = [applePositionY, applePositionX];  
+  appleToDisplay = [applePositionY, applePositionX]; 
 };
+
+/* TODO-1: Add the logic to check whether apple is on the snake or not and if so generate a new apple. */
+
+/* TODO-2: Add logic to ensure the apple doesn't spawn in the same cell multiple times. */
 
 function createApple() {
   $('td').removeClass('apple');
-  $('tr').eq(apple[0]).find('td').eq(apple[1]).addClass('apple');
+  $('tr').eq(appleToDisplay[0]).find('td').eq(appleToDisplay[1]).addClass('apple');
 }
 
 /* NORMAL MODE */
@@ -196,6 +237,6 @@ $(document).on("keydown", function(e) {
 });
 
 /* Ends game, duh! */
-function gameOver() {
+function gameOver() {  
   clearInterval(movement);
 };
