@@ -4,11 +4,10 @@ $(document).ready(function() {
     $(".welcome-screen").hide();
     $(".board").show();
     $(".controls").show(); 
-    createBoard();
+    createBoard(); 
     startGame();
-    updateSnakeBody();      
     applePosition();
-    createApple();
+    createApple(); 
     /* NOTE: Restart button is buggy and sometimes breaks game. */
     $(".restart").click(function() { 
       gameOver();  
@@ -53,6 +52,9 @@ let movingRight = true;
 let movingDown = false;
 let movingLeft = false;
 let movingUp = false;
+let validApple = false;
+let applePositionY;
+let applePositionX;
 /* Higher number = slower, lower number = faster */
 let speed = 150;
 let snakeHead = [2,6];
@@ -131,9 +133,8 @@ function updateSnakeBody() {
   snakeBody[0] = snakeHead;
 
   /* Checks if snake eats apple and increments size and checks if snake hits self and then stops game */
-  var newCell = { length: 0 };  
   var newCell = $('tr').eq(snakeNewHead[0]).find('td').eq(snakeNewHead[1]);
-  if (newCell.hasClass('snake-body')) {
+  if (newCell.hasClass("snake-body")) {
     if (movingRight == true) {
       snakeHead = [snakeHead[0], snakeHead[1] + 1];
       } else if (movingDown == true) {
@@ -145,15 +146,15 @@ function updateSnakeBody() {
       };
     gameOver();
   } else {
-    if (newCell.hasClass('apple')) {
+    if (newCell.hasClass("apple")) {
       snakeBody.push([]);         
       score++;   
       $(".score").html("<span>score: " + score + "</span>");
       applePosition();
       createApple();
     };
-  };
-  createSnake();
+  }; 
+  createSnake(); 
 };
 
 /* Changes cell colours to make snake visible */
@@ -176,10 +177,27 @@ function applePosition() {
   apple = [applePositionY, applePositionX]; */
 
   /* EASY MODE */
-
+  
+  validApple = false;
+  let newApple = { length: 0 };
   applePositionY = getRandomInt(2,6);
-  applePositionX = getRandomInt(2,6);
-  appleToDisplay = [applePositionY, applePositionX]; 
+  applePositionX = getRandomInt(2,6); 
+  newApple = $("tr").eq(applePositionY).find("td").eq(applePositionX);
+
+  while (validApple == false) {  
+    if (newApple.hasClass("snake-body")) {
+      console.log("apple on snake", newApple);
+      applePositionY = getRandomInt(2, 6);
+      applePositionX = getRandomInt(2, 6); 
+      newApple = $("tr").eq(applePositionY).find("td").eq(applePositionX);
+      console.log(newApple);
+    } else {
+      console.log("apple okay", newApple);
+      validApple = true;
+      break;
+    };
+  };
+  validApple = false;
 };
 
 /* TODO-1: Add the logic to check whether apple is on the snake or not and if so generate a new apple. */
@@ -188,8 +206,8 @@ function applePosition() {
 
 function createApple() {
   $('td').removeClass('apple');
-  $('tr').eq(appleToDisplay[0]).find('td').eq(appleToDisplay[1]).addClass('apple');
-}
+  $('tr').eq(applePositionY).find('td').eq(applePositionX).addClass('apple');
+};
 
 /* NORMAL MODE */
 
