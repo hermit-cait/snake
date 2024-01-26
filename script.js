@@ -1,7 +1,9 @@
 $(document).ready(function() {
+  $(".controls").show().css("display", "flex"); 
   createBoard();
   createApple();
   startGame();
+  $(".restart").click(restartGame);
 });
 
 let direction = "right",
@@ -29,6 +31,32 @@ function startGame() {
   movement = setInterval(updateSnakeBody, speed);
 };
 
+function restartGame() {  
+  gameOver();  
+  score = 0;
+  $(".score").html("<span>score: " + score + "</span>");
+  boardSize = 20;
+  movement = null;
+  movingRight = true;
+  movingDown = false;
+  movingLeft = false;
+  movingUp = false;
+  /* Higher number = slower, lower number = faster */
+  speed = 150;
+  snakeHead = [2,6];
+  snakeBody = [
+    [2,6],
+    [2,5],
+    [2,4],
+    [2,3],
+    [2,2]
+  ];
+  startGame();
+  updateSnakeBody();
+  applePosition();
+  createApple();
+};
+
 function createBoard() {
   let boardRow = "";
   for (let i = 0; i < boardSize; i++) {
@@ -40,6 +68,8 @@ function createBoard() {
   }
   $(document.body).append("<table class='board'></table>");
   $(".board").html(boardArray);
+  $(".controls").prepend('<div class="score" style="height: 3rem"></div>');  
+  $(".score").html("<span>score: " + score + "</span>");
   positionApple();
 };
 
