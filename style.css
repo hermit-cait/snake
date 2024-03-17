@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,24 +7,21 @@
 }
 
 h1, p, button, span {
-  font-family: monospace;
+  font-family: "Nunito";
+  letter-spacing: 0.04rem;
 }
 
 .welcome-screen {
-  background-color: hsl(120, 100%, 85%);
-  width: clamp(10rem, 70vw, 60rem);
+  background-color: hsl(120, 100%, 90%);
+  width: clamp(10rem, 60vw, 40rem);
   margin: 3rem auto;
-  padding: 2rem;
+  padding: 2rem 5rem;
   text-align: center;
-  display: none;
 }
 
-/* Comment the below out for easier testing */
-
-/* start */
-
 h1 {
-  font-size: 3.5rem;
+  font-size: 4rem;
+  line-height: 4rem;
 }
 
 .icon {
@@ -32,29 +31,35 @@ h1 {
 p {
   font-size: 1.5rem;
   margin-block: 2rem;
+  text-align: center;
 }
 
-/* end */
-
 button {
-  background-color: hsl(0, 0%, 93%);
+  background-color: hsl(120, 100%, 95%);
   font-size: 2rem;
-  height: 3rem;
   padding: 1rem;
   border: none;
   cursor: pointer;
 }
 
+button:disabled {
+  color: hsl(120, 50%, 70%);
+}
+
 button:hover {  
-  background-color: hsl(0, 0%, 87%);
+  background-color: hsl(120, 100%, 85%);
 }
 
 .start {
-  background-color: hsl(120, 100%, 70%);
+  background-color: rgb(0, 210, 106); 
+  color: black; 
+  font-weight: 700;
+  height: 5rem;
 }
 
 .start:hover {
   background-color: hsl(0, 0%, 100%);
+  color: rgb(0, 210, 106); 
 }
 
 .snake-body {
@@ -71,6 +76,7 @@ button:hover {
 
 .board {
   margin: 1.5rem auto;
+  position: relative;
 }
 
 td {
@@ -81,30 +87,75 @@ td {
 }
 
 .controls {
-  width: 32rem;
-  height: 5rem;
+  width: 408px;
+  height: 4rem;
   margin: 0 auto;
   margin-block-start: 2rem;
-  display: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.score > span, .pause, .play, .restart {
-  font-size: 1rem;
-}
-
-.pause, .play {
   display: none;
 }
 
-.score {
-  margin-block-start: 1.5rem;
+.score span, .restart {
+  font-size: 1rem;
 }
 
-@media (min-width: 600px) {
-  h1 {
-    font-size: 6rem;
-  }
+.restart {
+  padding-block-start: 1.1rem;
+}
+
+.score {
+  background-color: hsl(120, 100%, 95%);
+  width: max-content;
+  padding: 1rem;
+  padding-block-start: 1.1rem;
+}
+
+.overlay {
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  background-color: rgba(255,255,255,0.5);
+}
+
+.overlay-text {
+  font-size: 1.2rem;
+  width: 17rem;
+  height: max-content;
+  border-radius: 1.5rem;
+  background-color: hsl(120, 100%, 90%);
+  padding: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.overlay-text p {  
+  font-size: 1.2rem;
+}
+
+.close {
+  color: black;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.2rem;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: hsl(0, 85%, 55%);
+}
+
+.overlay-text .over {
+  font-size: 2rem;
+  font-weight: bold;
 }

@@ -3,7 +3,7 @@ $(document).ready(function() {
     /* Hide info and show game screen */
     $(".welcome-screen").fadeOut(300);
     $(".board").show();
-    $(".controls").show(); 
+    $(".controls").show().css("display", "flex"); 
     createBoard();
     startGame();
     updateSnakeBody();      
