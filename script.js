@@ -22,9 +22,11 @@ $(document).ready(function() {
     /* Hide info and show game screen */
     $(".welcome-screen").hide();
     $(".board").show();
-    $(".controls").show().css("display", "flex"); 
+    $(".controls-mobile").show();
+    $(".controls-desktop").show().css("display", "flex"); 
     createBoard();
     positionApple();
+    mobileControls();
     startGame();
     $(".restart").click(restartGame); 
   });
@@ -201,6 +203,43 @@ $(document).on("keydown", function(e) {
     movingUp = false;
   };
 });
+
+function mobileControls() {
+  $(".bottom").click(function() {
+    if (movingUp == false) {
+      /* DOWN */
+      movingRight = false;
+      movingDown = true;
+      movingLeft = false;
+      movingUp = false;
+    };
+  });
+  $(".right").click(function() {
+    if (movingLeft == false) {
+      /* RIGHT */
+      movingRight = true;
+      movingDown = false;
+      movingLeft = false;
+      movingUp = false;
+    };
+  });
+  $(".up").click(function() {
+    if (movingDown == false) {
+      movingRight = false;
+      movingDown = false;
+      movingLeft = false;
+      movingUp = true;
+    };
+  });
+  $(".left").click(function() {
+    if (movingRight == false) {
+      movingRight = false;
+      movingDown = false;
+      movingLeft = true;z
+      movingUp = false;
+    };
+  });
+};
 
 function createOverlay() {
   $(".overlay").html("<div class='overlay-text'><p class='over'>game over!</p><p>your score was " + score + ". </p></div>");

@@ -6,33 +6,56 @@
   box-sizing: border-box;
 }
 
+body {
+  position: relative;
+}
+
 h1, p, button, span {
   font-family: "Nunito";
   letter-spacing: 0.04rem;
 }
 
+h1 {
+  font-size: 3rem;
+}
+
+img {
+  width: 6rem;
+  height: 6rem;
+  margin-block-start: 3rem;
+}
+
 .welcome-screen {
   background-color: hsl(120, 100%, 90%);
-  width: clamp(10rem, 60vw, 40rem);
-  margin: 3rem auto;
-  padding: 2rem 5rem;
+  padding: 2rem;
+  height: 100vh;
   text-align: center;
 }
 
-h1 {
-  font-size: 4rem;
-  line-height: 4rem;
-}
-
-.icon {
-  font-size: 6rem;
+.score {
+  background-color: hsl(120, 100%, 95%);
+  width: max-content;
+  padding: 1rem;
+  padding-block-start: 1.1rem;
 }
 
 p {
   font-size: 1.5rem;
-  margin-block: 2rem;
-  text-align: center;
+  margin-block: 1rem 2rem;
 }
+
+.start {
+  background-color: rgb(0, 210, 106); 
+  color: white; 
+  font-weight: 700;
+  height: 5rem;
+}
+
+.start:hover {
+  background-color: hsl(0, 0%, 100%);
+  color: rgb(0, 210, 106); 
+}
+
 
 button {
   background-color: hsl(120, 100%, 95%);
@@ -50,16 +73,16 @@ button:hover {
   background-color: hsl(120, 100%, 85%);
 }
 
-.start {
-  background-color: rgb(0, 210, 106); 
-  color: black; 
-  font-weight: 700;
-  height: 5rem;
+.board {
+  margin: 1.5rem auto;
+  position: relative;
 }
 
-.start:hover {
-  background-color: hsl(0, 0%, 100%);
-  color: rgb(0, 210, 106); 
+td {
+  background-color: hsl(0, 0%, 93%);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
 }
 
 .snake-body {
@@ -74,25 +97,12 @@ button:hover {
   background-color: hsl(0, 85%, 65%);
 }
 
-.board {
-  margin: 1.5rem auto;
-  position: relative;
-}
-
-td {
-  background-color: hsl(0, 0%, 93%);
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 1.5rem;
-}
-
-.controls {
-  width: 408px;
+.controls-desktop {
   height: 4rem;
   margin: 0 auto;
   margin-block-start: 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   display: none;
 }
@@ -105,16 +115,9 @@ td {
   padding-block-start: 1.1rem;
 }
 
-.score {
-  background-color: hsl(120, 100%, 95%);
-  width: max-content;
-  padding: 1rem;
-  padding-block-start: 1.1rem;
-}
-
 .overlay {
-  width: 450px;
-  height: 450px;
+  width: 20rem;
+  height: 20rem;
   position: absolute;
   top: -15px;
   left: -15px;
@@ -124,12 +127,11 @@ td {
 }
 
 .overlay-text {
-  font-size: 1.2rem;
-  width: 17rem;
+  width: 12rem;
   height: max-content;
   border-radius: 1.5rem;
   background-color: hsl(120, 100%, 90%);
-  padding: 2rem;
+  padding: 1rem;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -137,17 +139,20 @@ td {
   -ms-transform: translate(-50%, -50%);
 }
 
-.overlay-text p {  
-  font-size: 1.2rem;
+.overlay-text p {
+  font-size: 1rem;
+  text-align: center;
+  margin: 0;  
+  padding: 0.5rem;
 }
 
 .close {
   color: black;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1.5rem;
   position: absolute;
-  right: 1.5rem;
-  top: 1.2rem;
+  right: 1rem;
+  top: 0.5rem;
   cursor: pointer;
 }
 
@@ -155,7 +160,141 @@ td {
   color: hsl(0, 85%, 55%);
 }
 
-.overlay-text .over {
-  font-size: 2rem;
-  font-weight: bold;
+.controls-mobile {
+  height: 10rem;
+  width: 100%;
+  /* background: pink; */
+  position: absolute;
+  top: 25.5rem;
+  display: none;
 }
+
+.arrow {
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+}
+
+.up {
+  background-image: url(arrow-up.svg);
+  position: absolute;
+  top: 0rem;
+  left: 46%;
+}
+
+.right {
+  background-image: url(arrow-up.svg);
+  transform: rotate(90deg);
+  position: absolute;
+  top: 35%;
+  left: 63%;
+}
+
+.bottom {
+  background-image: url(arrow-up.svg);
+  transform: rotate(180deg);
+  position: absolute;
+  bottom: 0;  
+  left: 46%;
+}
+
+.left {
+  background-image: url(arrow-up.svg);
+  transform: rotate(270deg);
+  position: absolute;
+  top: 35%;
+  left: 28%;
+}
+
+
+@media (min-width: 500px) {
+  
+  .arrow {
+    display: none;
+  }
+
+  img {
+    width: 7rem;
+    height: 7em;
+    margin-block: 1rem;
+  }
+  
+  .welcome-screen {
+    background-color: hsl(120, 100%, 90%);
+    width: clamp(10rem, 60vw, 40rem);
+    height: fit-content;
+    margin: 3rem auto;
+    padding: 2rem 5rem;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 4rem;
+    line-height: 4rem;
+  }
+  
+  .icon {
+    font-size: 6rem;
+  }
+  
+  p {
+    font-size: 1.5rem;
+    margin-block: 2rem;
+    text-align: center;
+  } 
+    
+  td {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 1.5rem;
+  }
+  
+  .controls-desktop {
+    width: 600px;
+  }
+
+  .controls-mobile {  
+    display:none;
+  }
+
+  .overlay {
+    width: 450px;
+    height: 450px;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    background-color: rgba(255,255,255,0.5);
+  }
+  
+  .overlay-text {
+    font-size: 1.2rem;
+    width: 17rem;
+    height: max-content;
+    border-radius: 1.5rem;
+    background-color: hsl(120, 100%, 90%);
+    padding: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+  
+  .close {
+    color: black;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .overlay-text .over {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+};
