@@ -110,7 +110,7 @@ function updateSnakeBody() {
   /* Handles movement of snake body by giving each cell the position of the previous cell in the array */
   for (var i = (snakeBody.length - 1); i > 0; i--) {
     snakeBody[i] = snakeBody[i - 1];
-      /* Fix for bug involving fast direction changes */ 
+    /* Fix for bug involving fast direction changes */ 
     if (snakeBody[i][0] == snakeNewHead[0] && snakeBody[i][1] == snakeNewHead[1]) {    
       if (movingLeft == true) {
         snakeNewHead = [snakeHead[0], snakeHead[1] + 1];
@@ -122,7 +122,7 @@ function updateSnakeBody() {
           snakeNewHead = [snakeHead[0] - 1, snakeHead[1]];
         };
       checkForWall();
-    }
+    };
   };  
   
   /* Saves new position of snake head */

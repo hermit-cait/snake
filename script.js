@@ -96,15 +96,31 @@ function updateSnakeBody() {
     };
 
   /* Ends game if snake hits wall */
-  if (snakeNewHead[0] < 1 || snakeNewHead[1] < 1) {
-    gameOver();
-  } else if (snakeNewHead[0] >= boardSize - 1 || snakeNewHead[1] >= boardSize - 1) {
-    gameOver();
+  function checkForWall() {
+    if (snakeNewHead[0] < 1 || snakeNewHead[1] < 1) {
+      gameOver();
+    } else if (snakeNewHead[0] >= boardSize - 1 || snakeNewHead[1] >= boardSize - 1) {
+      gameOver();
+    };
   };
+  checkForWall();
 
   /* Handles movement of snake body by giving each cell the position of the previous cell in the array */
   for (var i = (snakeBody.length - 1); i > 0; i--) {
     snakeBody[i] = snakeBody[i - 1];
+    /* Fix for bug involving fast direction changes (no. 1)*/ 
+    if (snakeBody[i][0] == snakeNewHead[0] && snakeBody[i][1] == snakeNewHead[1]) {    
+      if (movingLeft == true) {
+        snakeNewHead = [snakeHead[0], snakeHead[1] + 1];
+        } else if (movingUp == true) {
+          snakeNewHead = [snakeHead[0] + 1, snakeHead[1]];       
+        } else if (movingRight == true) {
+          snakeNewHead = [snakeHead[0], snakeHead[1] - 1];
+        } else if (movingDown == true) {
+          snakeNewHead = [snakeHead[0] - 1, snakeHead[1]];
+        };
+      checkForWall();
+    };
   };  
   
   /* Saves new position of snake head */
@@ -115,6 +131,17 @@ function updateSnakeBody() {
   /* Checks if snake eats apple and increments size and checks if snake hits self and then stops game */
   var newCell = $('tr').eq(snakeNewHead[0]).find('td').eq(snakeNewHead[1]);
   if (newCell.hasClass("snake-body")) {
+    
+    /* Fix for bug involving fast direction changes (no. 2) */
+    if (movingRight == true) {
+      snakeHead = [snakeHead[0], snakeHead[1] + 1];
+      } else if (movingDown == true) {
+        snakeHead = [snakeHead[0] + 1, snakeHead[1]];       
+      } else if (movingLeft == true) {
+        snakeHead = [snakeHead[0], snakeHead[1] - 1];
+      } else if (movingUp == true) {
+        snakeHead = [snakeHead[0] - 1, snakeHead[1]];
+      };
     gameOver();
   } else {
     if (newCell.hasClass("apple")) {
@@ -128,6 +155,7 @@ function updateSnakeBody() {
 };
 
 /* Places apple in a random cell */
+
 function positionApple() {
   apple = [getRandomInt(1, 15), getRandomInt(1, 15)];
   //apple = [getRandomInt(2, 6), getRandomInt(2, 6)];

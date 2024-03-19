@@ -10,7 +10,7 @@ body {
   position: relative;
 }
 
-h1, p, button, span {
+h1, p, a, button, span {
   font-family: "Nunito";
   letter-spacing: 0.04rem;
 }
@@ -44,6 +44,19 @@ p {
   margin-block: 1rem 2rem;
 }
 
+footer p, footer a {
+  font-size: 1rem;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .start {
   background-color: rgb(0, 210, 106); 
   color: white; 
@@ -55,7 +68,6 @@ p {
   background-color: hsl(0, 0%, 100%);
   color: rgb(0, 210, 106); 
 }
-
 
 button {
   background-color: hsl(120, 100%, 95%);
@@ -163,7 +175,6 @@ td {
 .controls-mobile {
   height: 10rem;
   width: 100%;
-  /* background: pink; */
   position: absolute;
   top: 25.5rem;
   display: none;
@@ -205,7 +216,6 @@ td {
   top: 35%;
   left: 28%;
 }
-
 
 @media (min-width: 500px) {
   
@@ -253,8 +263,8 @@ td {
     width: 600px;
   }
 
-  .controls-mobile {  
-    display:none;
+  .controls-mobile { 
+    display: none;
   }
 
   .overlay {
