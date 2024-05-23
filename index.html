@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>snake</title>
+    <link rel="icon" type="image/x-icon" href="snake.png">
     <link rel="stylesheet" href="style.css">
-    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -21,6 +22,9 @@
     </section>
     <section class="controls-desktop">
       <div class="score"></div>
+      <div class="slider-container">
+        <input type="range" min="50" max="450" value="250" class="slider" id="myRange">
+      </div>
       <button class="restart">RESTART</button>
     </section>
     <section class="controls-mobile">

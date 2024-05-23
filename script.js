@@ -22,7 +22,7 @@ $(document).ready(function() {
     /* Hide info and show game screen */
     $(".welcome-screen").hide();
     $(".board").show();
-    $(".controls-mobile").show();
+    $(".controls-mobile").show().css("display", "grid");
     $(".controls-desktop").show().css("display", "flex"); 
     createBoard();
     positionApple();
@@ -55,7 +55,7 @@ function restartGame() {
     [2, 2]
   ];
   positionApple();
-  startGame();
+  setTimeout(startGame, 5);
 };
 
 function createBoard() {
@@ -71,6 +71,10 @@ function createBoard() {
   $(".board").html(boardArray);
   $(".board").append("<div class='overlay'></div>");
   $(".score").html("<span>score: " + score + "</span>");
+  $("#myRange").on('input', function() {
+    speed = this.value;
+  });
+
 };
 
 /* Changes cell colours to make snake visible */
@@ -148,7 +152,7 @@ function updateSnakeBody() {
       snakeBody.push([newCell]);         
       score++;   
       $(".score").html("<span>score: " + score + "</span>");
-      positionApple();
+      setTimeout(positionApple, 5);
     };
   }; 
   createSnake(); 
@@ -157,16 +161,16 @@ function updateSnakeBody() {
 /* Places apple in a random cell */
 
 function positionApple() {
-  apple = [getRandomInt(1, 15), getRandomInt(1, 15)];
-  //apple = [getRandomInt(2, 6), getRandomInt(2, 6)];
+  //apple = [getRandomInt(1, 15), getRandomInt(1, 15)];
+  apple = [getRandomInt(2, 6), getRandomInt(2, 6)];
   newApple = $("tr").eq(apple[0]).find("td").eq(apple[1]);
   while (validApple == false) {  
     if (newApple.hasClass("snake-body")) {
       console.log("APPLE ON SNAKE", newApple);
-      applePositionY = getRandomInt(1, 15);
-      applePositionX = getRandomInt(1, 15); 
-      //applePositionY = getRandomInt(2, 6);
-      //applePositionX = getRandomInt(2, 6); 
+      //applePositionY = getRandomInt(1, 15);
+      //applePositionX = getRandomInt(1, 15); 
+      applePositionY = getRandomInt(2, 6);
+      applePositionX = getRandomInt(2, 6); 
       newApple = $("tr").eq(applePositionY).find("td").eq(applePositionX);
       apple = [applePositionY, applePositionX];
       console.log(applePositionY, applePositionX, newApple);
@@ -263,7 +267,7 @@ function mobileControls() {
     if (movingRight == false) {
       movingRight = false;
       movingDown = false;
-      movingLeft = true;z
+      movingLeft = true;
       movingUp = false;
     };
   });
@@ -271,17 +275,7 @@ function mobileControls() {
 
 function createOverlay() {
   $(".overlay").html("<div class='overlay-text'><p class='over'>game over!</p><p>your score was " + score + ". </p></div>");
-  $(".overlay-text").append("<span class='close'>x</span>");  
-  $(".close").click(function() {
-    $(".overlay").hide();
-  });
-  if (score < 5) {
-    $(".overlay-text").append("<p>you need more practice.</p>");
-  } else if (score < 10) {
-    $(".overlay-text").append("<p>that is not too shabby... </p>");
-  } else {
-    $(".overlay-text").append("<p>you're good at this! well done!</p>");
-  };
+  $(".overlay").delay(1000).fadeOut(750);
 };
 
 function gameOver() {
