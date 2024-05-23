@@ -1,5 +1,5 @@
 # snake
-CLASSIC SNAKE GAME...
+**CLASSIC SNAKE GAME...**
 
 Instructions - Use arrow keys to control the snake and eat as many apples as you can.
 
