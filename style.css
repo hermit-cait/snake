@@ -120,7 +120,7 @@ td {
 }
 
 .score span, .restart {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .restart {
@@ -231,8 +231,8 @@ td {
     background-color: hsl(120, 100%, 90%);
     width: clamp(10rem, 60vw, 40rem);
     height: fit-content;
-    margin: 3rem auto;
-    padding: 2rem 5rem;
+    margin: 8rem auto;
+    padding: 5rem 5rem;
     text-align: center;
   }
   
@@ -252,9 +252,9 @@ td {
   } 
     
   td {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
   }
   
   .controls-desktop {
@@ -267,14 +267,14 @@ td {
   }
 
   .overlay {
-    width: 450px;
-    height: 450px;
+    width: 570px;
+    height: 570px;
     position: absolute;
     top: -15px;
     left: -15px;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
   }
   
   .overlay-text {
