@@ -161,16 +161,13 @@ function updateSnakeBody() {
 /* Places apple in a random cell */
 
 function positionApple() {
-  //apple = [getRandomInt(1, 15), getRandomInt(1, 15)];
-  apple = [getRandomInt(2, 6), getRandomInt(2, 6)];
+  apple = [getRandomInt(1, 15), getRandomInt(1, 15)];
   newApple = $("tr").eq(apple[0]).find("td").eq(apple[1]);
   while (validApple == false) {  
     if (newApple.hasClass("snake-body")) {
       console.log("APPLE ON SNAKE", newApple);
-      //applePositionY = getRandomInt(1, 15);
-      //applePositionX = getRandomInt(1, 15); 
-      applePositionY = getRandomInt(2, 6);
-      applePositionX = getRandomInt(2, 6); 
+      applePositionY = getRandomInt(1, 15);
+      applePositionX = getRandomInt(1, 15); 
       newApple = $("tr").eq(applePositionY).find("td").eq(applePositionX);
       apple = [applePositionY, applePositionX];
       console.log(applePositionY, applePositionX, newApple);
