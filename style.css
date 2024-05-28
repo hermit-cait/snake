@@ -60,6 +60,7 @@ a:hover {
 .start {
   background-color: rgb(0, 210, 106); 
   color: white; 
+  font-size: 1rem;
   font-weight: 700;
   height: 5rem;
 }
